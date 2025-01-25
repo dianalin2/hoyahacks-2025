@@ -248,3 +248,15 @@ button {
     border-color: #D7A32B;
     padding: 20px;
 }
+
+#toast {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    padding: 1em;
+    transition: opacity 0.5s;
+    border-bottom: 5px solid white;
+    opacity: 0;
+}

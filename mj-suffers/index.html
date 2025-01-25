@@ -10,6 +10,10 @@
 
 <body class="everything">
 
+  <div id="toast">
+    <div id="toastText"></div>
+  </div>
+
   <nav class="nav" id="nav">
     <div class="logo-left">
       <img class="bombLogo" src="https://file.garden/ZhkD9yUtsAenJzxk/SMS%20logo.png" alt="bomb logo">
@@ -136,6 +140,11 @@
             window.api.indexDirectory(path).then(({ event, data }) => {
               console.log(data.response);
               refreshTable();
+              showToast('Indexing complete');
+            }).catch(({ event, err }) => {
+              console.error(err);
+              refreshTable();
+              showToast('Indexing failed; some files may not have been indexed');
             });
           });
         });
@@ -175,6 +184,16 @@
           }
         }, 1000);
       });
+
+      function showToast(message) {
+        const toast = document.getElementById('toast');
+        const toastText = document.getElementById('toastText');
+        toastText.innerHTML = message;
+        toast.style.opacity = '100%';
+        setTimeout(() => {
+          toast.style.opacity = '0%';
+        }, 5000);
+      }
 
       var prevScrollpos = window.pageYOffset;
       window.onscroll = function () {

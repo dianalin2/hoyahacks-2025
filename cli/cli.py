@@ -44,7 +44,7 @@ def index(dir_path):
             files = fs.list_files_in_dir(current_file)
 
             for file in files:
-                if file not in dir_cache:
+                if file not in dir_cache or os.path.isdir(current_file) or db.get_file_outdated(file):
                     queue.append(file)
         else:
             dir_cache[current_file] = fs.get_file_description(current_file, dir_cache)
