@@ -5,7 +5,7 @@ class File(mongoengine.Document):
     name = mongoengine.StringField()
     path = mongoengine.StringField()
     created = mongoengine.DecimalField()
-    accessed = mongoengine.DecimalField()
+    modified = mongoengine.DecimalField()
     description = mongoengine.StringField()
 
 def connect():
@@ -19,7 +19,7 @@ def index_file(file_path, description):
         name=os.path.basename(file_path),
         path=file_path,
         created=os.path.getctime(file_path),
-        accessed=os.path.getatime(file_path),
+        accessed=os.path.getmtime(file_path),
         description=description
     )
     file.save()
@@ -28,10 +28,10 @@ def get_file_outdated(file_path):
     file = File.objects(path=file_path).first()
     if file is None:
         return None
-    file_accessed = os.path.getatime(file_path)
-    if file_accessed > file.accessed.timestamp():
+    file_modified = os.path.getatime(file_path)
+    if file_modified > file.modified.timestamp():
         return file
     return None
 
 def get_all_files_caches():
-    return {file.name: file.description for file in File.objects}
+    return {file.path: file.description for file in File.objects}
