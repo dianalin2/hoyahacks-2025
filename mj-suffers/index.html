@@ -3,11 +3,6 @@
 <head>
 <style>
   *{box-sizing: border-box;}
-.choosefile {
-  font-size: 24px;
-  color: tomato;
-  font-family: verdana;
-}
 
 .center {
   margin: 0;
@@ -53,7 +48,7 @@
   width: 100%;
   z-index: 1000;
   padding: 1rem;
-  box-shadow: 0 2px 5px #0003;
+  box-shadow: 0 2px 5px #D7A32B;
   height: 5%;
   transition: top 0.3s;
 }
@@ -90,8 +85,13 @@
 
 .searchContentBar {
   /* align-self: normal; */
-  font-size: 24px;
+  font-size: 12px;
   font-family: verdana;
+  text-align: left;
+  text-align: start;
+  height: 144px;
+  width: 460px;
+  border-radius: 12px;
 }
 
 .searchCategoryHeader{
@@ -173,9 +173,8 @@
 .searchbutton{
   margin-bottom: 12px;
   font-size: 24px;
-  color: black;
+  color: white;
   font-family: verdana;
-  
 }
 
 .searchContainer{
@@ -212,13 +211,21 @@
   background-color: rgba(255, 200, 200, .5);
   width: 450px;
   padding: 2%;
-  height: 70px;
+  /* height: 70px; */
 }
 
 .uploadB {
-  margin-top: -47px;
-  position: absolute;
-  margin-left: 73%;
+  /* margin-top: -47px; */
+  position: flex;
+  /* margin-left: 73%; */
+  
+}
+
+.buttonBig{
+  background-color: #F8B92A;
+  border-radius: 12px;
+  border-color: #D7A32B;
+  padding: 20px;
 }
 
 </style>
@@ -235,11 +242,15 @@
   <main class="main">
     <div class="center">
         <div class="uploadContainer">
-          <input class="searchContentBar" type="text" id="searchContent" onkeyup="myFunction()" placeholder="Search files...">
+          <form action="/action_page.php">
+            <label for="files">Select files:</label>
+            <br>
+            <input type="file" id="files" name="files" multiple><br><br>
+          </form>
           <br>
           <div class="uploadB">
-            <button>
-              <span class="searchbutton">Upload</span>
+            <button class="buttonBig">
+              <span class="searchbutton">UPLOAD</span>
             </button>
           </div>
         </div>
@@ -320,8 +331,8 @@
         <br>
 
         <div class="button">
-          <button>
-            <span class="searchbutton">Search</span>
+          <button class="buttonBig">
+            <span class="searchbutton">SEARCH</span>
           </button>
         </div>
         
