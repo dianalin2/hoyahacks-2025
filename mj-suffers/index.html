@@ -12,7 +12,7 @@
 
   <nav class="nav">
     <div class="logo-left">
-      <img class="bombLogo" src="https://file.garden/ZhkD9yUtsAenJzxk/SMS%20logo.png" alt="bomb logo">
+      <img class="bombLogo" src="https://file.garden/ZhkD9yUtsAenJzxk/image.png" alt="bomb logo">
     </div>
 
   </nav>
@@ -22,12 +22,9 @@
       <div class="uploadHeader">
         <input class="searchContentBar" type="text" id="searchFiles" onkeyup="myFunction()"
           placeholder="Search files...">
-        <form action="/action_page.php">
-          <label for="files">Select files:</label>
-          <br>
-          <input class="buttonBig" type="file" id="files" name="files" multiple><br><br>
-        </form>
-        <!-- <input type="file" class="uploadB" id="files" name="files" webkitdirectory directory> -->
+        <button class="uploadB" id="uploadButton">
+          Upload
+        </button>
       </div>
 
       <table id="fileTable">
@@ -38,11 +35,11 @@
         <tbody id="fileList"></tbody>
       </table>
     </div>
-    <!-- <div class="uploadB">
+    <div class="uploadB">
       <button class="buttonBig">
         <span class="searchbutton">UPLOAD</span>
       </button>
-    </div> -->
+    </div>
 
     <div class="searchContainer">
       <div>
