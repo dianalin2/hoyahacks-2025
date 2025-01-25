@@ -21,7 +21,7 @@
     z-index: 1000;
     padding: 1rem;
     box-shadow: 0 2px 5px #0003;
-    height: 5%;
+    height: 10%;
     transition: top 0.3s;
 }
 
@@ -29,7 +29,7 @@
     /* font-family: 'Poppins', sans-serif;
 padding: 0px; */
     /* background: rgb(252, 239, 200); */
-    background-image: url(https://www.hoohacks.io/assets/Final-DWQvED0Q.png);
+    background-image: url(https://file.garden/ZhkD9yUtsAenJzxk/Untitled_design_1.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -49,14 +49,25 @@ padding: 0px; */
 .logo-left {
     position: absolute;
     left: 4%;
-    color: #fff;
+}
+
+.bombLogo {
+    height: 70px;
+    color: white;
+    margin-left: 2%;
 }
 
 .searchContentBar {
     /* align-self: normal; */
-    font-size: 24px;
+    font-size: 12px;
     font-family: verdana;
-}
+    text-align: left;
+    text-align: top;
+    
+    height: 144px;
+    width: 460px;
+    border-radius: 12px;
+  }
 
 .searchCategoryHeader {
 
@@ -146,8 +157,7 @@ padding: 0px; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    background-color: rgba(255, 200, 200, .5);
+    background-color: rgba(255, 255, 255, 0.2);
     align-items: center;
     width: 500px;
     height: 500px;
@@ -171,7 +181,7 @@ padding: 0px; */
 }
 
 .uploadContainer {
-    background-color: rgba(255, 200, 200, .5);
+    background-color: rgba(255, 255, 255, .2);
     padding: 4%;
 }
 
@@ -199,4 +209,18 @@ padding: 0px; */
 
 #fileList tr:hover {
     background-color: #f1f1f1;
+}
+
+.uploadB {
+    /* margin-top: -47px; */
+    position: flex;
+    /* margin-left: 73%; */
+
+}
+
+.buttonBig {
+    background-color: #F8B92A;
+    border-radius: 12px;
+    border-color: #D7A32B;
+    padding: 20px;
 }

@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Upload and Search</title>
   <link rel="stylesheet" href="index.css">
 </head>
 
@@ -9,7 +12,7 @@
 
   <nav class="nav">
     <div class="logo-left">
-      <!-- put logo somewhere here -->
+      <img class="bombLogo" src="https://file.garden/ZhkD9yUtsAenJzxk/image.png" alt="bomb logo">
     </div>
 
   </nav>
@@ -17,11 +20,14 @@
   <main class="main">
     <div class="uploadContainer">
       <div class="uploadHeader">
-        <input class="searchContentBar" type="text" id="searchContent" onkeyup="myFunction()"
+        <input class="searchContentBar" type="text" id="searchFiles" onkeyup="myFunction()"
           placeholder="Search files...">
-        <button class="uploadB">
-          <span class="searchbutton">Upload</span>
-        </button>
+        <form action="/action_page.php">
+          <label for="files">Select files:</label>
+          <br>
+          <input type="file" id="files" name="files" multiple><br><br>
+        </form>
+        <!-- <input type="file" class="uploadB" id="files" name="files" webkitdirectory directory> -->
       </div>
 
       <table id="fileTable">
@@ -31,6 +37,11 @@
         </thead>
         <tbody id="fileList"></tbody>
       </table>
+    </div>
+    <div class="uploadB">
+      <button class="buttonBig">
+        <span class="searchbutton">UPLOAD</span>
+      </button>
     </div>
 
     <div class="searchContainer">
@@ -93,8 +104,8 @@
       </div>
 
       <div class="button">
-        <button>
-          <span class="searchbutton">Search</span>
+        <button class="buttonBig">
+          <span class="searchbutton">SEARCH</span>
         </button>
       </div>
 
