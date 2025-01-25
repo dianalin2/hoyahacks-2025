@@ -26,4 +26,16 @@ contextBridge.exposeInMainWorld('api', {
             })
         })
     },
+    openFile: (path) => {
+        ipcRenderer.send('openFile', { path });
+
+        return new Promise((resolve, reject) => {
+            ipcRenderer.once('openFile-success', (event, data) => {
+                resolve({ event, data })
+            })
+            ipcRenderer.once('openFile-error', (event, error) => {
+                reject({ event, error })
+            })
+        })
+    }
 })

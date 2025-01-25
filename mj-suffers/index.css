@@ -1,0 +1,221 @@
+* {
+    box-sizing: border-box;
+}
+
+.choosefile {
+    font-size: 24px;
+    color: tomato;
+    font-family: verdana;
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    left: 45%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+}
+
+.oneQuarter {
+    margin: 0;
+    position: absolute;
+    left: 80%;
+}
+
+.twoQuarter {
+    margin: 0;
+    position: absolute;
+    left: 100%;
+}
+
+.threeQuarter {
+    margin: 0;
+    position: absolute;
+    left: 120%;
+}
+
+.fourQuarter {
+    margin: 0;
+    position: absolute;
+    left: 140%;
+}
+
+.nav {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(67, 55, 55, 0.75);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1rem;
+    box-shadow: 0 2px 5px #0003;
+    height: 5%;
+    transition: top 0.3s;
+}
+
+.everything {
+    /* font-family: 'Poppins', sans-serif;
+padding: 0px; */
+    /* background: rgb(252, 239, 200); */
+    background-image: url(https://www.hoohacks.io/assets/Final-DWQvED0Q.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: relative;
+    width: 100vw;
+    height: 100%;
+    overflow: scroll;
+    font-family: verdana;
+}
+
+.main {
+    display: flex;
+    /* align-items: center; */
+    gap: 100px;
+    margin-right: 10px;
+    margin-top: -10px;
+    color: rgb(0, 0, 0);
+}
+
+.logo-left {
+    position: absolute;
+    left: 4%;
+    color: #fff;
+}
+
+.searchContentBar {
+    /* align-self: normal; */
+    font-size: 24px;
+    font-family: verdana;
+}
+
+.searchCategoryHeader {
+
+    margin-bottom: 12px;
+    font-size: 24px;
+    font-family: verdana;
+    padding: 1%;
+}
+
+.cbcontainer {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.cbcontainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border: 2px black solid;
+}
+
+/* On mouse-over, add a grey background color */
+.cbcontainer:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.cbcontainer input:checked~.checkmark {
+    background-color: #002B4E;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.cbcontainer input:checked~.checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.cbcontainer .checkmark:after {
+    left: 6px;
+    top: 3px;
+    width: 5px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(35deg);
+    -ms-transform: rotate(35deg);
+    transform: rotate(35deg);
+}
+
+.searchbutton {
+    margin-bottom: 12px;
+    font-size: 24px;
+    color: black;
+    font-family: verdana;
+
+}
+
+.searchContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin-top: 50%;
+    margin-left: 70%;
+    background-color: rgba(255, 200, 200, .5);
+    align-items: center;
+    width: 500px;
+    height: 500px;
+    padding: 4%;
+}
+
+.button {
+    grid-row-start: 5;
+    grid-column-start: 1;
+    grid-column-end: 6;
+    display: flex;
+    justify-content: center;
+}
+
+.filterContainer {
+    padding-bottom: 120px;
+    position: inherit;
+}
+
+.uploadContainer {
+    position: absolute;
+    margin-top: 50%;
+    margin-left: -50%;
+    background-color: rgba(255, 200, 200, .5);
+    width: 450px;
+    padding: 2%;
+    height: 70px;
+}
+
+.uploadB {
+    margin-top: -47px;
+    position: absolute;
+    margin-left: 73%;
+}
