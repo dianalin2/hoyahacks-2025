@@ -59,18 +59,15 @@ padding: 0px; */
 
 .searchContentBar {
     /* align-self: normal; */
-    font-size: 12px;
+    font-size: 20px;
     font-family: verdana;
     text-align: left;
     text-align: top;
-    
-    height: 144px;
-    width: 460px;
     border-radius: 12px;
+    padding: 1rem;
   }
 
 .searchCategoryHeader {
-
     margin-bottom: 12px;
     font-size: 24px;
     font-family: verdana;
