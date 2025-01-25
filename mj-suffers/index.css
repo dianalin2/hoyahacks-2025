@@ -2,19 +2,12 @@
     box-sizing: border-box;
 }
 
-.choosefile {
-    font-size: 24px;
-    color: tomato;
-    font-family: verdana;
-
-}
-
 .nav {
     position: fixed;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #FEECCF;
+    background-color: rgba(255, 255, 255, 0.5);
     position: fixed;
     top: 0;
     left: 0;
@@ -23,8 +16,9 @@
     padding: 1rem;
     box-shadow: 0 2px 5px #0003;
     height: 10%;
-    transition: top 0.3s;
+    transition: top 0.1s;
 }
+
 
 .everything {
     /* font-family: 'Poppins', sans-serif;
@@ -49,8 +43,8 @@ padding: 0px; */
 }
 
 .logo-left {
-    position: absolute;
-    margin-left: 45%;
+    margin: auto;
+    color: #fff;
 }
 
 .bombLogo {
@@ -61,15 +55,16 @@ padding: 0px; */
 
 .searchContentBar {
     /* align-self: normal; */
-    font-size: 20px;
+    font-size: 24px;
     font-family: verdana;
     text-align: left;
     text-align: top;
     border-radius: 12px;
     padding: 1rem;
-  }
+}
 
 .searchCategoryHeader {
+
     margin-bottom: 12px;
     font-size: 24px;
     font-family: verdana;
@@ -219,8 +214,7 @@ padding: 0px; */
     border-radius: 12px;
     border-color: #D7A32B;
     padding: 20px;
-    font-size: 24px;
-
+    font-size: 20px;
 }
 
 .buttonBig {
@@ -229,4 +223,3 @@ padding: 0px; */
     border-color: #D7A32B;
     padding: 20px;
 }
-
