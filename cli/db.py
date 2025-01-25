@@ -33,5 +33,8 @@ def get_file_outdated(file_path):
         return file
     return None
 
+def get_all_files():
+    return File.objects
+
 def get_all_files_caches():
     return {file.path: file.description for file in File.objects}

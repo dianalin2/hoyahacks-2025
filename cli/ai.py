@@ -1,15 +1,37 @@
 import torch
 from transformers import MllamaForConditionalGeneration, AutoProcessor
+import google.generativeai as genai
+import os
 
-model_id = "meta-llama/Llama-3.2-11B-Vision-Instruct"
+model_type = "gemini"
 
-model = MllamaForConditionalGeneration.from_pretrained(
-    model_id,
-    torch_dtype=torch.bfloat16,
-    # device_map="auto",
-)
+if model_type == "llama":
+    model_id = "meta-llama/Llama-3.2-11B-Vision-Instruct"
 
-def make_request(prompt, image=None):
+    model = MllamaForConditionalGeneration.from_pretrained(
+        model_id,
+        torch_dtype=torch.bfloat16,
+        # device_map="auto",
+    )
+else:
+    genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+    model = genai.GenerativeModel("gemini-1.5-flash-8b-exp-0924")
+
+def make_gemini_request(prompt, image=None):
+    if image:
+        response = model.generate_content(
+            [prompt, image]
+        )
+    else:
+        response = model.generate_content(
+            [prompt]
+        )
+    
+    return response.text
+
+
+def make_llama_request(prompt, image=None):
+
     processor = AutoProcessor.from_pretrained(model_id)
 
     num_images = 0
@@ -47,3 +69,9 @@ def make_request(prompt, image=None):
 
     output = model.generate(**inputs, max_new_tokens=30)
     return processor.decode(output[0], skip_special_tokens=True).split("assistant\n", 1)[1].strip()
+
+def make_request(prompt, image=None):
+    if model_type == "llama":
+        return make_llama_request(prompt, image)
+    else:
+        return make_gemini_request(prompt, image)
