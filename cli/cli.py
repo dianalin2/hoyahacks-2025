@@ -2,10 +2,31 @@ import sys
 import fs
 import db
 import os
+import ai
+import typer
+from typing import Annotated
 
-def main():
-    dir_path = sys.argv[1]
+def main(
+    command: Annotated[str, typer.Argument(help="The command to run")],
+    path: Annotated[str, typer.Option(help="The path of the directory to index")] = "",
+    query: Annotated[str, typer.Option(help="The query to run")] = "",
+    paths: Annotated[str, typer.Option(help="The indexed paths to search in")] = ""
+):
+    if command == "index" and not path:
+        print("You must provide a path to index.")
+        sys.exit(1)
+    
+    if command == "query" and not query:
+        print("You must provide a query to run.")
+        sys.exit(1)
+    
+    if command == "index":
+        index(path)
+    elif command == "query":
+        print(query_files(query, paths))
 
+
+def index(dir_path):
     db.connect()
 
     dir_cache = db.get_all_files_caches()
@@ -31,6 +52,35 @@ def main():
     
     db.disconnect()
 
+def query_files(query, paths=None):
+    db.connect()
+
+    files = db.get_all_files()
+
+    if paths:
+        paths = set(paths.split(','))
+        files = [file for file in files if file.path in paths or any([file.path.startswith(path) for path in paths])]
+
+    response = ai.make_request(f"""
+You have the following query:
+                               
+{query}
+
+You have the following files in your system:
+
+Path | Description
+-----
+{'\n'.join([f"{file.path} | {file.description}" for file in files])}
+
+Given the above files, specify up to 10 files that fit the query. Consider both the the name and description of the files.
+
+Answer clearly and concisely. Answer only with the full filepaths of the files with a single newline separating the paths and nothing else. If there are no files that fit the query, answer with `None`.
+""")
+
+    db.disconnect()
+    
+    return response.strip()
+
 
 if __name__ == "__main__":
-    main()
+    typer.run(main)

@@ -4,3 +4,5 @@ opencv-python
 Pillow
 torch
 magic-python
+grpcio==1.67.1
+grpcio-status==1.67.1 

@@ -19,7 +19,7 @@ def index_file(file_path, description):
         name=os.path.basename(file_path),
         path=file_path,
         created=os.path.getctime(file_path),
-        accessed=os.path.getmtime(file_path),
+        modified=os.path.getmtime(file_path),
         description=description
     )
     file.save()

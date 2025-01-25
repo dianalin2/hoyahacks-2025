@@ -14,6 +14,8 @@ if model_type == "llama":
     )
 else:
     import google.generativeai as genai
+    os.environ["GRPC_VERBOSITY"] = "ERROR"
+    os.environ["GLOG_minloglevel"] = "2"
     genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
     model = genai.GenerativeModel("gemini-1.5-flash-8b-exp-0924")
 
