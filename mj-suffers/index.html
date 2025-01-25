@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+<<<<<<< HEAD
 <style>
   *{box-sizing: border-box;}
 
@@ -230,7 +232,11 @@
 }
 
 </style>
+=======
+  <link rel="stylesheet" href="index.css">
+>>>>>>> a6c3dadbca3aa204339546f387ca22e4b7be4c1e
 </head>
+
 <body class="everything">
 
   <nav class="nav">
@@ -239,23 +245,18 @@
     </div>
 
   </nav>
-  
-  <main class="main">
-    <div class="center">
-        <div class="uploadContainer">
-          <form action="/action_page.php">
-            <label for="files">Select files:</label>
-            <br>
-            <input type="file" id="files" name="files" multiple><br><br>
-          </form>
-          <br>
-          <div class="uploadB">
-            <button class="buttonBig">
-              <span class="searchbutton">UPLOAD</span>
-            </button>
-          </div>
-        </div>
 
+  <main class="main">
+    <div class="uploadContainer">
+      <div class="uploadHeader">
+        <input class="searchContentBar" type="text" id="searchContent" onkeyup="myFunction()"
+          placeholder="Search files...">
+        <button class="uploadB">
+          <span class="searchbutton">Upload</span>
+        </button>
+      </div>
+
+<<<<<<< HEAD
 
         <div class="searchContainer">
             <div>
@@ -338,14 +339,111 @@
         </div>
         
         </div>
+=======
+      <table id="fileTable">
+        <thead>
+          <th>File Name</th>
+          <th>File Description</th>
+        </thead>
+        <tbody id="fileList"></tbody>
+      </table>
+>>>>>>> a6c3dadbca3aa204339546f387ca22e4b7be4c1e
     </div>
-    
-    <div>
-      
+
+    <div class="searchContainer">
+      <div>
+        <input class="searchContentBar" type="text" id="searchContent2" onkeyup="myFunction()"
+          placeholder="File description...">
+      </div>
+
+      <div class="searchCategoryHeader">Choose File Types</div>
+
+      <div class="filterContainer">
+        <label class="cbcontainer" id="filter pdf">
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+          <span>.pdf</span>
+        </label>
+        <label class="cbcontainer" id="filter pdf">
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+          <span>.csv</span>
+        </label>
+        <label class="cbcontainer" id="filter pdf">
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+          <span>.png</span>
+        </label>
+
+        <label class="cbcontainer" id="filter doc">
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+          <span>.doc</span>
+        </label>
+        <label class="cbcontainer" id="filter pdf">
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+          <span>.mp4</span>
+        </label>
+
+        <label class="cbcontainer" id="filter txt">
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+          <span>.txt</span>
+        </label>
+        <label class="cbcontainer" id="filter pdf">
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+          <span>.xlsx</span>
+        </label>
+
+        <label class="cbcontainer" id="filter mov">
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+          <span>.mov</span>
+        </label>
+        <label class="cbcontainer" id="filter jpeg">
+          <input type="checkbox" checked="checked">
+          <span class="checkmark"></span>
+          <span>.jpeg</span>
+        </label>
+      </div>
+
+      <div class="button">
+        <button>
+          <span class="searchbutton">Search</span>
+        </button>
+      </div>
+
     </div>
-    
+
+    <script>
+      window.api.queryAll().then(({ event, data }) => {
+        const fileList = document.getElementById('fileList');
+        for (const key in data.response) {
+          const tr = document.createElement('tr');
+
+          const file = document.createElement('td');
+          file.innerHTML = key;
+          tr.appendChild(file);
+
+          const fileDescription = document.createElement('td');
+          fileDescription.innerHTML = data.response[key];
+          tr.appendChild(fileDescription);
+
+          fileList.appendChild(tr);
+
+          tr.onclick = () => {
+            window.api.openFile(key);
+          }
+        }
+      });
+    </script>
+
   </main>
-  
+
+
 
 </body>
+
 </html>

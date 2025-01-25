@@ -1,5 +1,5 @@
 
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, shell } = require('electron')
 const path = require('path')
 
 const createWindow = () => {
@@ -22,7 +22,7 @@ app.whenReady().then(() => {
   ipcMain.on('queryAll', async (event) => {
     try {
       const response = await fetch('http://localhost:5000/all');
-      const files = await response.text();
+      const files = await response.json();
       event.sender.send('queryAll-success', files)
     } catch (err) {
       console.error(err)
@@ -38,6 +38,16 @@ app.whenReady().then(() => {
     } catch (err) {
       console.error(err)
       event.sender.send('queryDB-error', err)
+    }
+  });
+
+  ipcMain.on('openFile', async (event, { path }) => {
+    try {
+      shell.showItemInFolder(path)
+      event.sender.send('openFile-success')
+    } catch (err) {
+      console.error(err)
+      event.sender.send('openFile-error', err)
     }
   });
 });
