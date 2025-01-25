@@ -19,7 +19,16 @@ def query():
     if query is None:
         return jsonify({"response": "Please provide a query parameter"})
     
-    return jsonify({"response": cli.query_files(query, paths)})
+    return jsonify({"response": cli.query_files(query, paths).split("\n")})
+
+@app.route('/index')
+def index():
+    path = request.args.get('path')
+
+    if path is None:
+        return jsonify({"response": "Please provide a path parameter"})
+
+    return jsonify({"response": cli.index(path)})
 
 if __name__ == '__main__':
     app.run('127.0.0.1', 5000)

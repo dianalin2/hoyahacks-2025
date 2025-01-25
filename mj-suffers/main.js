@@ -33,6 +33,8 @@ app.whenReady().then(() => {
   ipcMain.on('queryDB', async (event, { query, paths }) => {
     try {
       const queryStr = encodeURIComponent(query)
+      if (paths === undefined)
+        paths = []
       const pathsStr = encodeURIComponent(paths)
       const response = await fetch(`http://localhost:5000/query?query=${queryStr}&paths=${pathsStr}`);
       const files = await response.json();
@@ -65,6 +67,18 @@ app.whenReady().then(() => {
     } catch (err) {
       console.error(err)
       event.sender.send('searchDirectory-error', err)
+    }
+  });
+
+  ipcMain.on('indexDirectory', async (event, { path }) => {
+    try {
+      const pathStr = encodeURIComponent(path);
+      const response = await fetch(`http://localhost:5000/index?path=${pathStr}`);
+      const files = await response.json();
+      event.sender.send('indexDirectory-success', files)
+    } catch (err) {
+      console.error(err)
+      event.sender.send('indexDirectory-error', err)
     }
   });
 });

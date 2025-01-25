@@ -20,14 +20,15 @@ def main(
         print("You must provide a query to run.")
         sys.exit(1)
     
+    db.connect()
     if command == "index":
         index(path)
     elif command == "query":
         print(query_files(query, paths))
+    db.disconnect()
 
 
 def index(dir_path):
-    db.connect()
 
     dir_cache = db.get_all_files_caches()
 
@@ -49,19 +50,15 @@ def index(dir_path):
             dir_cache[current_file] = fs.get_file_description(current_file, dir_cache)
             db.index_file(current_file, dir_cache[current_file])
             print(current_file, ":", dir_cache[current_file])
-    
-    db.disconnect()
 
 def query_files(query, paths=None):
-    db.connect()
-
     files = db.get_all_files()
 
     if paths:
         paths = set(paths.split(','))
         files = [file for file in files if file.path in paths or any([file.path.startswith(path) for path in paths])]
 
-    response = ai.make_request(f"""
+    return ai.make_request(f"""
 You have the following query:
                                
 {query}
@@ -75,12 +72,7 @@ Path | Description
 Given the above files, specify up to 10 files that fit the query. Consider both the the name and description of the files.
 
 Answer clearly and concisely. Answer only with the full filepaths of the files with a single newline separating the paths and nothing else. If there are no files that fit the query, answer with `None`.
-""")
-
-    db.disconnect()
-    
-    return response.strip()
-
+""").strip()
 
 if __name__ == "__main__":
     typer.run(main)

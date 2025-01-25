@@ -20,8 +20,7 @@
   <main class="main">
     <div class="uploadContainer">
       <div class="uploadHeader">
-        <input class="searchContentBar" type="text" id="searchFiles" onkeyup="myFunction()"
-          placeholder="Search files...">
+        <input class="searchContentBar" type="text" id="searchFiles" placeholder="Search files...">
         <button class="uploadB" id="uploadButton">
           Upload
         </button>
@@ -130,11 +129,41 @@
         }
       });
 
-      document.getElementById('uploadButton').onclick = () => {
+      document.getElementById('uploadButton').addEventListener('click', () => {
         window.api.searchDirectory().then(({ event, data }) => {
           const paths = data.filePaths;
+
+          paths.forEach(path => {
+            window.api.indexDirectory(path);
+          });
         });
-      }
+      });
+
+      let lastMoveTime = 0;
+      document.getElementById('searchFiles').addEventListener('keyup', () => {
+        lastMoveTime = Date.now();
+        setTimeout(() => {
+          if (Date.now() - lastMoveTime >= 1000) {
+            const query = document.getElementById('searchFiles').value;
+
+            window.api.queryDB(query).then(({ event, data }) => {
+              console.log(data.response);
+              const files = new Set(data.response)
+              const fileList = document.getElementById('fileList');
+
+              for (const tr of fileList.children) {
+                const fileName = tr.children[0].innerHTML;
+                if (files.has(fileName)) {
+                  tr.style.display = '';
+                } else {
+                  tr.style.display = 'none';
+                }
+              }
+
+            });
+          }
+        }, 1000);
+      });
     </script>
 
   </main>
