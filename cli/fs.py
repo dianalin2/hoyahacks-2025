@@ -2,6 +2,7 @@ import ai
 import glob
 import magic
 import cv2
+import db
 from PIL import Image
 
 
@@ -138,7 +139,3 @@ Give me a brief description of the file. Consider the path of the file, the name
 
 Answer clearly and concisely, in less than 10 words. Answer only with the description and nothing else.
     """)
-
-    
-    
-                
