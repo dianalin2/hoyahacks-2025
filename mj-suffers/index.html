@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <link rel="stylesheet" type="text/css" href="index.css">
+  <link rel="stylesheet" href="index.css">
 </head>
 
 <body class="everything">
@@ -29,8 +29,7 @@
           <th>File Name</th>
           <th>File Description</th>
         </thead>
-        <tbody id="fileList">
-        </tbody>
+        <tbody id="fileList"></tbody>
       </table>
     </div>
 
@@ -94,14 +93,12 @@
       </div>
 
       <div class="button">
-        <button class="buttonBig">
-          <span class="searchbutton">SEARCH</span>
+        <button>
+          <span class="searchbutton">Search</span>
         </button>
       </div>
-    </div>
 
     </div>
-
 
     <script>
       window.api.queryAll().then(({ event, data }) => {
@@ -127,6 +124,9 @@
     </script>
 
   </main>
+
+
+
 </body>
 
 </html>

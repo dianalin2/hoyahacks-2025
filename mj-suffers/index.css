@@ -8,30 +8,6 @@
     font-family: verdana;
 }
 
-/* .oneQuarter {
-    margin: 0;
-    position: absolute;
-    left: 80%;
-}
-
-.twoQuarter {
-    margin: 0;
-    position: absolute;
-    left: 100%;
-}
-
-.threeQuarter {
-    margin: 0;
-    position: absolute;
-    left: 120%;
-}
-
-.fourQuarter {
-    margin: 0;
-    position: absolute;
-    left: 140%;
-} */
-
 .nav {
     position: fixed;
     display: flex;
