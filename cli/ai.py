@@ -1,11 +1,10 @@
 import torch
-from transformers import MllamaForConditionalGeneration, AutoProcessor
-import google.generativeai as genai
 import os
 
 model_type = "gemini"
 
 if model_type == "llama":
+    from transformers import MllamaForConditionalGeneration, AutoProcessor
     model_id = "meta-llama/Llama-3.2-11B-Vision-Instruct"
 
     model = MllamaForConditionalGeneration.from_pretrained(
@@ -14,6 +13,7 @@ if model_type == "llama":
         # device_map="auto",
     )
 else:
+    import google.generativeai as genai
     genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
     model = genai.GenerativeModel("gemini-1.5-flash-8b-exp-0924")
 
