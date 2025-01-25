@@ -37,5 +37,17 @@ contextBridge.exposeInMainWorld('api', {
                 reject({ event, error })
             })
         })
+    },
+    searchDirectory: () => {
+        ipcRenderer.send('searchDirectory');
+
+        return new Promise((resolve, reject) => {
+            ipcRenderer.once('searchDirectory-success', (event, data) => {
+                resolve({ event, data })
+            })
+            ipcRenderer.once('searchDirectory-error', (event, error) => {
+                reject({ event, error })
+            })
+        })
     }
 })

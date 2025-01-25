@@ -132,6 +132,12 @@
           }
         }
       });
+
+      document.getElementById('uploadButton').onclick = () => {
+        window.api.searchDirectory().then(({ event, data }) => {
+          const paths = data.filePaths;
+        });
+      }
     </script>
 
   </main>

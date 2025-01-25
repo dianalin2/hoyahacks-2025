@@ -1,5 +1,5 @@
 
-const { app, BrowserWindow, ipcMain, shell } = require('electron')
+const { app, BrowserWindow, ipcMain, shell, dialog } = require('electron')
 const path = require('path')
 
 const createWindow = () => {
@@ -50,6 +50,21 @@ app.whenReady().then(() => {
     } catch (err) {
       console.error(err)
       event.sender.send('openFile-error', err)
+    }
+  });
+
+  ipcMain.on('searchDirectory', async (event) => {
+    try {
+      const files = await dialog.showOpenDialog({ properties: ['openDirectory'] });
+      if (files === undefined) {
+        console.log('No file selected')
+        event.sender.send('searchDirectory-error', { response: 'No file selected' })
+        return //stop it from sending success 
+      }
+      event.sender.send('searchDirectory-success', files);
+    } catch (err) {
+      console.error(err)
+      event.sender.send('searchDirectory-error', err)
     }
   });
 });
