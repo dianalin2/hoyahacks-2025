@@ -30,9 +30,11 @@ app.whenReady().then(() => {
     }
   });
 
-  ipcMain.on('queryDB', async (event) => {
+  ipcMain.on('queryDB', async (event, { query, paths }) => {
     try {
-      const response = await fetch('http://localhost:5000/query');
+      const queryStr = encodeURIComponent(query)
+      const pathsStr = encodeURIComponent(paths)
+      const response = await fetch(`http://localhost:5000/query?query=${queryStr}&paths=${pathsStr}`);
       const files = await response.json();
       event.sender.send('queryDB-success', files)
     } catch (err) {
