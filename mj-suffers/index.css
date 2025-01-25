@@ -1,5 +1,7 @@
 * {
     box-sizing: border-box;
+    outline: none;
+    border: none;
 }
 
 .nav {
@@ -64,24 +66,25 @@ padding: 0px; */
 }
 
 .searchCategoryHeader {
-
     margin-bottom: 12px;
     font-size: 24px;
     font-family: verdana;
     padding: 1%;
+    font-weight: bold;
+    text-align: center;
 }
 
 .cbcontainer {
     display: block;
     position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
+    padding: 1rem 1rem;
     cursor: pointer;
     font-size: 22px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    margin: 0.5rem;
 }
 
 /* Hide the browser's default checkbox */
@@ -96,12 +99,11 @@ padding: 0px; */
 /* Create a custom checkbox */
 .checkmark {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 20px;
+    left: -10px;
     height: 20px;
     width: 20px;
     background-color: #fff;
-    border: 2px black solid;
 }
 
 /* On mouse-over, add a grey background color */
@@ -144,7 +146,7 @@ padding: 0px; */
     font-size: 24px;
     color: black;
     font-family: verdana;
-
+    border-radius: 12px;
 }
 
 .searchContainer {
@@ -153,25 +155,34 @@ padding: 0px; */
     justify-content: space-between;
     background-color: rgba(255, 255, 255, 0.2);
     align-items: center;
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    max-width: 100%;
+    height: min-content;
     padding: 4%;
+    gap: 20px;
 }
 
 .button {
-    grid-row-start: 5;
-    grid-column-start: 1;
-    grid-column-end: 6;
     display: flex;
     justify-content: center;
 }
 
-.filterContainer {
-    padding-bottom: 120px;
+button,
+input[type="text"] {
+    border: 2px solid black;
+}
+
+button {
+    cursor: pointer;
+}
+
+#filterContainer {
     position: inherit;
     display: grid;
     grid-template-columns: auto auto auto;
     width: 100%;
+    position: relative;
+    left: 10px;
 }
 
 .uploadContainer {
@@ -190,20 +201,34 @@ padding: 0px; */
     border-collapse: collapse;
     height: 45vh;
     overflow-y: auto;
+    width: 100%;
+    table-layout: fixed;
 }
 
 #fileTable thead th {
     position: sticky;
     top: 0;
-    background-color: #f1f1f1;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10pt;
 }
 
 #fileList tr {
     cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: background-color 0.2s;
 }
 
+#fileTable th,
+#fileTable td {
+    border-bottom: 1px solid black;
+    text-align: left;
+    padding: 10pt;
+    width: 50%;
+}
+
+
 #fileList tr:hover {
-    background-color: #f1f1f1;
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .uploadB {

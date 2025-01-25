@@ -20,9 +20,13 @@ else:
     model = genai.GenerativeModel("gemini-1.5-flash-8b-exp-0924")
 
 def make_gemini_request(prompt, image=None):
-    if image:
+    if image and hasattr(image, "size"):
         response = model.generate_content(
             [prompt, image]
+        )
+    elif image and hasattr(image[0], "size"):
+        response = model.generate_content(
+            [prompt] + image
         )
     else:
         response = model.generate_content(

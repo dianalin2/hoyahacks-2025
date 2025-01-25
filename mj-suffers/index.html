@@ -22,7 +22,7 @@
       <div class="uploadHeader">
         <input class="searchContentBar" type="text" id="searchFiles" placeholder="Search files...">
         <button class="uploadB" id="uploadButton">
-          Upload
+          Index New Directory
         </button>
       </div>
 
@@ -34,107 +34,109 @@
         <tbody id="fileList"></tbody>
       </table>
     </div>
-    <!-- <div class="uploadB">
-      <button class="buttonBig">
-        <span class="searchbutton">UPLOAD</span>
-      </button>
-    </div> -->
 
     <div class="searchContainer">
-      <div>
-        <input class="searchContentBar" type="text" id="searchContent2" onkeyup="myFunction()"
-          placeholder="File description...">
+      <div style="width: 100%;">
+        <div class="searchCategoryHeader">Advanced Search</div>
+        <hr>
+        <div id="filterContainer"></div>
       </div>
 
-      <div class="searchCategoryHeader">Choose File Types</div>
-
-      <div class="filterContainer">
-        <label class="cbcontainer" id="filter pdf">
-          <input type="checkbox" checked="checked">
-          <span class="checkmark"></span>
-          <span>.pdf</span>
-        </label>
-        <label class="cbcontainer" id="filter pdf">
-          <input type="checkbox" checked="checked">
-          <span class="checkmark"></span>
-          <span>.csv</span>
-        </label>
-        <label class="cbcontainer" id="filter pdf">
-          <input type="checkbox" checked="checked">
-          <span class="checkmark"></span>
-          <span>.png</span>
-        </label>
-
-        <label class="cbcontainer" id="filter doc">
-          <input type="checkbox" checked="checked">
-          <span class="checkmark"></span>
-          <span>.doc</span>
-        </label>
-        <label class="cbcontainer" id="filter pdf">
-          <input type="checkbox" checked="checked">
-          <span class="checkmark"></span>
-          <span>.mp4</span>
-        </label>
-
-        <label class="cbcontainer" id="filter txt">
-          <input type="checkbox" checked="checked">
-          <span class="checkmark"></span>
-          <span>.txt</span>
-        </label>
-        <label class="cbcontainer" id="filter pdf">
-          <input type="checkbox" checked="checked">
-          <span class="checkmark"></span>
-          <span>.xlsx</span>
-        </label>
-
-        <label class="cbcontainer" id="filter mov">
-          <input type="checkbox" checked="checked">
-          <span class="checkmark"></span>
-          <span>.mov</span>
-        </label>
-        <label class="cbcontainer" id="filter jpeg">
-          <input type="checkbox" checked="checked">
-          <span class="checkmark"></span>
-          <span>.jpeg</span>
-        </label>
-      </div>
+      <hr>
 
       <div class="button">
         <button class="buttonBig">
-          <span class="searchbutton">SEARCH</span>
+          <span class="searchbutton">Search</span>
         </button>
       </div>
-
     </div>
 
     <script>
-      window.api.queryAll().then(({ event, data }) => {
-        const fileList = document.getElementById('fileList');
-        for (const key in data.response) {
-          const tr = document.createElement('tr');
+      function getExtension(filename) {
+        if (filename.indexOf('.') === -1)
+          return '';
 
-          const file = document.createElement('td');
-          file.innerHTML = key;
-          tr.appendChild(file);
+        // get the file extension
+        const ext = filename.split('.').pop();
 
-          const fileDescription = document.createElement('td');
-          fileDescription.innerHTML = data.response[key];
-          tr.appendChild(fileDescription);
-
-          fileList.appendChild(tr);
-
-          tr.onclick = () => {
-            window.api.openFile(key);
-          }
+        // check if the file extension is valid (is alphanumeric)
+        if (!/^[a-z0-9]+$/i.test(ext)) {
+          return '';
         }
-      });
+
+        return ext;
+      }
+
+      const fileExtensions = new Set();
+      const allowedExtensions = new Set();
+      let searched = null;
+      function refreshTable() {
+        window.api.queryAll().then(({ event, data }) => {
+          const fileList = document.getElementById('fileList');
+          fileList.innerHTML = '';
+          for (const key in data.response) {
+            const tr = document.createElement('tr');
+
+            const file = document.createElement('td');
+            file.innerHTML = key;
+            tr.appendChild(file);
+
+            const fileDescription = document.createElement('td');
+            fileDescription.innerHTML = data.response[key];
+            tr.appendChild(fileDescription);
+
+            fileList.appendChild(tr);
+
+            const extension = getExtension(key);
+            if (!fileExtensions.has(extension)) {
+              allowedExtensions.add(extension);
+              fileExtensions.add(extension);
+              const filterContainer = document.getElementById('filterContainer');
+              const label = document.createElement('label');
+              label.className = 'cbcontainer';
+              label.id = `filter ${extension}`;
+              label.innerHTML = `
+                <input type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+                <span>${extension ? '.' + extension : 'n/a'}</span>
+              `;
+              filterContainer.appendChild(label);
+
+              label.onclick = () => {
+                const checked = label.children[0].checked;
+                if (checked) {
+                  allowedExtensions.add(extension);
+                } else {
+                  allowedExtensions.delete(extension);
+                }
+                for (const tr of fileList.children) {
+                  const fileName = tr.children[0].innerHTML;
+                  const ext = getExtension(fileName);
+                  if (ext === extension && (!searched || searched.has(fileName))) {
+                    tr.style.display = checked ? '' : 'none';
+                  }
+                }
+              }
+            }
+
+            tr.onclick = () => {
+              window.api.openFile(key);
+            }
+          }
+        });
+      }
+
+      refreshTable();
 
       document.getElementById('uploadButton').addEventListener('click', () => {
         window.api.searchDirectory().then(({ event, data }) => {
           const paths = data.filePaths;
 
           paths.forEach(path => {
-            window.api.indexDirectory(path);
+            window.api.indexDirectory(path).then(({ event, data }) => {
+              console.log(data.response);
+              refreshTable();
+            });
           });
         });
       });
@@ -145,6 +147,7 @@
         const query = document.getElementById('searchFiles').value;
 
         if (query === '') {
+          searched = null;
           for (const tr of document.getElementById('fileList').children) {
             tr.style.display = '';
           }
@@ -155,13 +158,13 @@
           if (Date.now() - lastMoveTime >= 1000) {
 
             window.api.queryDB(query).then(({ event, data }) => {
-              console.log(data.response);
               const files = new Set(data.response)
+              searched = files;
               const fileList = document.getElementById('fileList');
 
               for (const tr of fileList.children) {
                 const fileName = tr.children[0].innerHTML;
-                if (files.has(fileName)) {
+                if (files.has(fileName) && allowedExtensions.has(getExtension(fileName))) {
                   tr.style.display = '';
                 } else {
                   tr.style.display = 'none';
