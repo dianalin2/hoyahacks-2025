@@ -8,15 +8,7 @@
     font-family: verdana;
 }
 
-.center {
-    margin: 0;
-    position: absolute;
-    left: 45%;
-    top: 30%;
-    transform: translate(-50%, -50%);
-}
-
-.oneQuarter {
+/* .oneQuarter {
     margin: 0;
     position: absolute;
     left: 80%;
@@ -38,7 +30,7 @@
     margin: 0;
     position: absolute;
     left: 140%;
-}
+} */
 
 .nav {
     position: fixed;
@@ -66,18 +58,15 @@ padding: 0px; */
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: relative;
-    width: 100vw;
     height: 100%;
-    overflow: scroll;
     font-family: verdana;
+    margin-top: 10%;
 }
 
 .main {
     display: flex;
-    /* align-items: center; */
-    gap: 100px;
-    margin-right: 10px;
-    margin-top: -10px;
+    justify-content: space-around;
+    gap: 10px;
     color: rgb(0, 0, 0);
 }
 
@@ -182,8 +171,6 @@ padding: 0px; */
     flex-direction: column;
     justify-content: space-between;
 
-    margin-top: 50%;
-    margin-left: 70%;
     background-color: rgba(255, 200, 200, .5);
     align-items: center;
     width: 500px;
@@ -202,20 +189,38 @@ padding: 0px; */
 .filterContainer {
     padding-bottom: 120px;
     position: inherit;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 100%;
 }
 
 .uploadContainer {
-    position: absolute;
-    margin-top: 50%;
-    margin-left: -50%;
     background-color: rgba(255, 200, 200, .5);
-    width: 450px;
-    padding: 2%;
-    height: 70px;
+    padding: 4%;
 }
 
-.uploadB {
-    margin-top: -47px;
-    position: absolute;
-    margin-left: 73%;
+.uploadHeader {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    margin-bottom: 2em;
+}
+
+#fileTable {
+    border-collapse: collapse;
+    height: 45vh;
+    overflow-y: auto;
+}
+
+#fileTable thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f1f1f1;
+}
+
+#fileList tr {
+    cursor: pointer;
+}
+
+#fileList tr:hover {
+    background-color: #f1f1f1;
 }
