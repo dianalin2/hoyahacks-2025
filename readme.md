@@ -1,6 +1,7 @@
 ##Sort My Stuff (SMS)
 
 ##About the project
+
 Sort My Stuff (SMS) allows the user to select a folder to recursively index information about. In addition to displaying metadata about each file/directory in the folder, SMS also generates a description of each file/directory based on the content and context of the file, effectively streamlining the user's file system analysis process. Additionally, SMS implements a smart searching feature to quickly and elegantly find a file based off of a human-friendly prompt as well as provide for common filters such as file extensions.
 
 ##Source of Inspiration 
