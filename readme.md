@@ -14,7 +14,7 @@ Every year, ~24,000 reports of on-campus crimes are reported and investigators o
 
 ##Importance
 
-SMS allows users to find files in a significantly shorter time which allows users to sort files more efficiently and effevtively. 
+SMS allows users to find files in a significantly shorter time which allows users to sort files more efficiently and effevtively. This efficiency would serve its purpose especially under dire situations where files need to be located as quickly as possible. 
 
 
 ##Future Works
