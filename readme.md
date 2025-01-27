@@ -17,7 +17,7 @@ SMS allows users to find files in a significantly shorter time which allows user
 
 A few things we want to implement in the future are speech-to-text searching, adding more advanced search, and making it both multi-modal and multilingual. We want our software to be applicable in a wider range of situations while also making it more accessible.
 
-## Contributers
+## Contributors
 
 - Diana Lin
 - Jessica Su
